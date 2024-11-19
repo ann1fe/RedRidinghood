@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour
     public GameObject gameWinUI;
 
     public GameObject handOverMushroomsUI;
+    public GameObject player;
+    public GameObject playerCamera;
 
     void Awake()
     {
@@ -64,22 +66,22 @@ public class GameManager : MonoBehaviour
     {
         gameOverUI.SetActive(true);
         Time.timeScale = 0f; // Pause the game
-        Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
     }
 
     public void WinGame()
     {
         gameWinUI.SetActive(true);
-        Time.timeScale = 0f; 
-        Cursor.visible = true;
+        SetPlayerFrozen(true);
         Cursor.lockState = CursorLockMode.None;
         handOverMushroomsUI.SetActive(false);
     }
-
+    public void SetPlayerFrozen(bool frozen) {
+        player.GetComponent<PlayerMovement>().enabled = !frozen; 
+        playerCamera.GetComponent<PlayerCamera>().enabled = !frozen; 
+    }
     public void RestartGame()
     {
-        Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         mushroomCount = 0;
@@ -92,4 +94,14 @@ public class GameManager : MonoBehaviour
     {
         return GameObject.FindGameObjectsWithTag("Mushroom").Length;
     }
+
+    public void NotifyDialogueEnded()
+    {
+        if (MushroomsLeftCount() == 0)
+        {
+            WinGame();
+        }
+        
+    }
+
 }

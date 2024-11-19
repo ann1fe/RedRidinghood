@@ -1,46 +1,46 @@
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
-using UnityEngine;
 using UnityEngine.UI;
-
+using UnityEngine;
+using TMPro;
+ 
 public class DialogueManager : MonoBehaviour
 {
     public static DialogueManager Instance;
-
+ 
+    public Image characterIcon;
     public TextMeshProUGUI characterName;
     public TextMeshProUGUI dialogueArea;
-
+ 
     private Queue<DialogueLine> lines;
-
-    public bool isDialogueActive = false;
+    
     public float typingSpeed = 0.2f;
-
-    // Start is called before the first frame update
-    void Start()
+ 
+    private void Awake()
     {
+        Debug.Log("DialogManagerAwake");
         if (Instance == null)
-        Instance = this;
+            Instance = this;
+ 
+        lines = new Queue<DialogueLine>();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+ 
     public void StartDialogue(Dialogue dialogue)
     {
-        isDialogueActive = true;
+        GameManager.Instance.SetPlayerFrozen(true);
         lines.Clear();
-        foreach(DialogueLine dialogueLine in dialogue.dialogueLines)
+ 
+        foreach (DialogueLine dialogueLine in dialogue.dialogueLines)
         {
             lines.Enqueue(dialogueLine);
         }
-
+ 
         DisplayNextDialogueLine();
-    }
 
+        //Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+    }
+ 
     public void DisplayNextDialogueLine()
     {
         if (lines.Count == 0)
@@ -48,18 +48,31 @@ public class DialogueManager : MonoBehaviour
             EndDialogue();
             return;
         }
-
+ 
         DialogueLine currentLine = lines.Dequeue();
-        
+ 
         characterName.text = currentLine.character.name;
-
+ 
         StopAllCoroutines();
-
+ 
         StartCoroutine(TypeSentence(currentLine));
     }
-
+ 
     IEnumerator TypeSentence(DialogueLine dialogueLine)
     {
-        dialogueArea
+        dialogueArea.text = "";
+        foreach (char letter in dialogueLine.line.ToCharArray())
+        {
+            dialogueArea.text += letter;
+            yield return new WaitForSeconds(typingSpeed);
+        }
+    }
+ 
+    void EndDialogue()
+    {
+        gameObject.SetActive(false);
+        Cursor.lockState = CursorLockMode.Locked;
+        GameManager.Instance.SetPlayerFrozen(false);
+        GameManager.Instance.NotifyDialogueEnded();
     }
 }
