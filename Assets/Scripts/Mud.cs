@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Mud : MonoBehaviour
 {
-    public float mudSpeed = 2f; // Movement speed on mud
+    public float mudSpeed = 1f; // Movement speed on mud
 
     private void OnTriggerEnter(Collider other)
     {
