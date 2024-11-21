@@ -72,7 +72,6 @@
     <Compile Include="Assets\Scripts\Mud.cs" />
     <Compile Include="Assets\Scripts\PlayerScripts\PlayerMovement.cs" />
     <Compile Include="Assets\ExternalAssets\Idyllic Fantasy Nature\Scripts\BushLeafTrigger.cs" />
-    <Compile Include="Assets\Scripts\Door.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\ExternalAssets\Idyllic Fantasy Nature\Scripts\ButterflySpawnArea.cs" />
     <Compile Include="Assets\Scripts\WIP\WIPWolfAIWithBaby.cs" />

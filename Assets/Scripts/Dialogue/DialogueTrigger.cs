@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using TMPro;
 
 [System.Serializable]
 public class DialogueCharacter
@@ -29,6 +29,17 @@ public class DialogueTrigger : MonoBehaviour
     public List<Dialogue> dialogues;
     public int dialogueIndex = 0;
     public GameObject dialogueBox;
+    public TextMeshProUGUI dialoguePrompt;
+    private bool playerInRange = false;
+
+    void Update()
+    {
+        if (playerInRange && Input.GetKeyDown(KeyCode.E))
+        {
+            TriggerDialogue();
+        }
+    }
+
     public void TriggerDialogue()
     {
         dialogueBox.SetActive(true);
@@ -45,11 +56,27 @@ public class DialogueTrigger : MonoBehaviour
         dialogueIndex++;
     }
  
-    private void OnTriggerEnter(Collider collision)
+    void OnTriggerEnter(Collider other)
     {
-        if(collision.tag == "Player")
+        if (other.CompareTag("Player"))
         {
-            TriggerDialogue();
+            playerInRange = true;
+            if (dialoguePrompt != null)
+            {
+                dialoguePrompt.gameObject.SetActive(true);
+            }
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            playerInRange = false;
+            if (dialoguePrompt != null)
+            {
+                dialoguePrompt.gameObject.SetActive(false);
+            }
         }
     }
 }

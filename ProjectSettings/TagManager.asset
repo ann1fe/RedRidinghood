@@ -10,6 +10,7 @@ TagManager:
   - canPickUp
   - Mud
   - Pushable
+  - Enemy
   layers:
   - Default
   - TransparentFX
