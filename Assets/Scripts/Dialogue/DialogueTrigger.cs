@@ -52,8 +52,6 @@ public class DialogueTrigger : MonoBehaviour
             dialogueIndex=2;
         }
         DialogueManager.Instance.StartDialogue(dialogues[dialogueIndex]);
-
-        dialogueIndex++;
     }
  
     void OnTriggerEnter(Collider other)
@@ -61,10 +59,7 @@ public class DialogueTrigger : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerInRange = true;
-            if (dialoguePrompt != null)
-            {
-                dialoguePrompt.gameObject.SetActive(true);
-            }
+            dialoguePrompt.gameObject.SetActive(true);
         }
     }
 
@@ -73,10 +68,7 @@ public class DialogueTrigger : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerInRange = false;
-            if (dialoguePrompt != null)
-            {
-                dialoguePrompt.gameObject.SetActive(false);
-            }
+            dialoguePrompt.gameObject.SetActive(false);
         }
     }
 }

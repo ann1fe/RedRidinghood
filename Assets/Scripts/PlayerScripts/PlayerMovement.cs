@@ -8,15 +8,12 @@ public class PlayerMovement : MonoBehaviour
 {
     private CharacterController controller;
     public float speed = 5f;
-    public float gravity = -9.8f;
+    public float gravity = 9.8f;
     public float jumpHeight = 2f;
     private bool canJump = true;
-    private Vector3 velocity;
-
-    public Transform groundCheck;
-    public float groundDistance = 0.4f;
+    private float upSpeed;
+    public float groundCheckDistance = 0.4f;
     public LayerMask groundMask;
-    private bool isGrounded;
     private float normalSpeed;
     
 
@@ -25,34 +22,31 @@ public class PlayerMovement : MonoBehaviour
         controller = GetComponent<CharacterController>();
         normalSpeed = speed;
     }
-
+    bool IsGrounded()
+    {
+        Vector3 capsuleBottom = transform.position - Vector3.up * controller.height / 2;
+        return Physics.CheckSphere(capsuleBottom, groundCheckDistance, groundMask);    
+    }
     void Update()
     {
-        // Ground check with raycast or sphere cast
-        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
-
-        if (isGrounded && velocity.y < 0)
-        {
-            velocity.y = -2f; // Keeps the player grounded
-        }
+        var isGrounded =  IsGrounded();
 
         // Get input for horizontal and vertical movement (WASD or arrow keys)
-        float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");
-
-        Vector3 move = transform.right * horizontal + transform.forward * vertical;
-
-        controller.Move(move * speed * Time.deltaTime);
+        float rightSpeed = Input.GetAxis("Horizontal") * speed;
+        float forwardSpeed = Input.GetAxis("Vertical") * speed;
 
         // Jump logic
         if (isGrounded && canJump && Input.GetButtonDown("Jump"))
         {
-            velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+            // v2=2gh => v = sqrt(2gh)
+            upSpeed = Mathf.Sqrt(2f * gravity * jumpHeight);
         }
 
-        velocity.y += gravity * Time.deltaTime;
+        // apply gravity to vertical speed v=g*t
+        upSpeed -= gravity * Time.deltaTime;
+        Vector3 moveSpeed = transform.right * rightSpeed + transform.forward * forwardSpeed + Vector3.up * upSpeed;
+        controller.Move(moveSpeed * Time.deltaTime);
 
-        controller.Move(velocity * Time.deltaTime);
     }
 
     // Adjust the player's movement speed

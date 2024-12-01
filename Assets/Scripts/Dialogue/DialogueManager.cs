@@ -18,7 +18,6 @@ public class DialogueManager : MonoBehaviour
  
     private void Awake()
     {
-        Debug.Log("DialogManagerAwake");
         if (Instance == null)
             Instance = this;
  
@@ -28,6 +27,7 @@ public class DialogueManager : MonoBehaviour
     public void StartDialogue(Dialogue dialogue)
     {
         GameManager.Instance.SetPlayerFrozen(true);
+        GameManager.Instance.SetEnemiesFrozen(true);
         lines.Clear();
  
         foreach (DialogueLine dialogueLine in dialogue.dialogueLines)
@@ -73,6 +73,7 @@ public class DialogueManager : MonoBehaviour
         gameObject.SetActive(false);
         Cursor.lockState = CursorLockMode.Locked;
         GameManager.Instance.SetPlayerFrozen(false);
+        GameManager.Instance.SetEnemiesFrozen(false);
         GameManager.Instance.NotifyDialogueEnded();
     }
 }

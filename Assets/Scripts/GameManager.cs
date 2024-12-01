@@ -79,6 +79,12 @@ public class GameManager : MonoBehaviour
     public void SetPlayerFrozen(bool frozen) {
         player.GetComponent<PlayerMovement>().enabled = !frozen; 
         playerCamera.GetComponent<PlayerCamera>().enabled = !frozen; 
+    }    
+    public void SetEnemiesFrozen(bool frozen) {
+        var enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        foreach (var enemy in enemies) {
+            enemy.GetComponent<EnemyFollow>().SetFrozen(frozen);
+        }
     }
     public void RestartGame()
     {

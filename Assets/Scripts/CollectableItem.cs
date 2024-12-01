@@ -9,10 +9,7 @@ public class CollectableItem : MonoBehaviour
 
     void Start()
     {
-        if (collectPrompt != null)
-        {
-            collectPrompt.gameObject.SetActive(false);
-        }
+        collectPrompt.gameObject.SetActive(false);
     }
 
     void OnTriggerEnter(Collider other)
@@ -20,10 +17,7 @@ public class CollectableItem : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerInRange = true;
-            if (collectPrompt != null)
-            {
-                collectPrompt.gameObject.SetActive(true);
-            }
+            collectPrompt.gameObject.SetActive(true); 
         }
     }
 
@@ -32,10 +26,7 @@ public class CollectableItem : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerInRange = false;
-            if (collectPrompt != null)
-            {
-                collectPrompt.gameObject.SetActive(false);
-            }
+            collectPrompt.gameObject.SetActive(false);
         }
     }
 
@@ -49,19 +40,8 @@ public class CollectableItem : MonoBehaviour
 
     void Collect()
     {
-        if (GameManager.Instance != null)
-        {
-            GameManager.Instance.AddMushroom();
-        }
-        else
-        {
-            Debug.LogError("GameManager instance not found!");
-        }
-
-        if (collectPrompt != null)
-        {
-            collectPrompt.gameObject.SetActive(false);
-        }
+        GameManager.Instance.AddMushroom();
+        collectPrompt.gameObject.SetActive(false);
 
         Destroy(gameObject);
     }
