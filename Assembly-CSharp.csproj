@@ -65,7 +65,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Dialogue\DialogueManager.cs" />
-    <Compile Include="Assets\Scripts\WolfAI.cs" />
     <Compile Include="Assets\Scripts\PlankScript.cs" />
     <Compile Include="Assets\Scripts\KillZone.cs" />
     <Compile Include="Assets\ExternalAssets\Idyllic Fantasy Nature\Scripts\VegetationBendControl.cs" />
