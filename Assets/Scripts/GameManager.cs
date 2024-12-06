@@ -20,8 +20,8 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
-        // Set up the singleton instance
-        if (Instance == null)  // ?
+        // Set up the singleton instance (use instance to easily access game manager)
+        if (Instance == null)   
         {
             Instance = this;
         }
@@ -33,13 +33,7 @@ public class GameManager : MonoBehaviour
 
     void OnEnable()
     {
-        // Subscribe to the sceneLoaded event
-        SceneManager.sceneLoaded += OnSceneLoaded;  // ?
-        // unsubscribe?
-    }
-
-    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
+        // Unpause the game because gameover paused the game
         Time.timeScale = 1f;
     }
 
@@ -52,14 +46,7 @@ public class GameManager : MonoBehaviour
 
     void UpdateMushroomUI()
     {
-        if (mushroomText != null)
-        {
-            mushroomText.text = "Mushrooms Collected: " + mushroomCount;
-        }
-        else
-        {
-            Debug.LogWarning("Mushroom Text UI is not assigned in the GameManager.");
-        }
+        mushroomText.text = "Mushrooms Collected: " + mushroomCount;
     }
 
     public void GameOver()
@@ -106,8 +93,6 @@ public class GameManager : MonoBehaviour
         if (MushroomsLeftCount() == 0)
         {
             WinGame();
-        }
-        
+        }   
     }
-
 }

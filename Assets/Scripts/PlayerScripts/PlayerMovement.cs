@@ -29,7 +29,7 @@ public class PlayerMovement : MonoBehaviour
     }
     void Update()
     {
-        var isGrounded =  IsGrounded();
+        var isGrounded = IsGrounded();
 
         // Get input for horizontal and vertical movement (WASD or arrow keys)
         float rightSpeed = Input.GetAxis("Horizontal") * speed;

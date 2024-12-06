@@ -7,8 +7,7 @@ using TMPro;
 public class DialogueManager : MonoBehaviour
 {
     public static DialogueManager Instance;
- 
-    public Image characterIcon;
+
     public TextMeshProUGUI characterName;
     public TextMeshProUGUI dialogueArea;
  
@@ -20,7 +19,7 @@ public class DialogueManager : MonoBehaviour
     {
         if (Instance == null)
             Instance = this;
- 
+    
         lines = new Queue<DialogueLine>();
     }
  
@@ -30,14 +29,13 @@ public class DialogueManager : MonoBehaviour
         GameManager.Instance.SetEnemiesFrozen(true);
         lines.Clear();
  
-        foreach (DialogueLine dialogueLine in dialogue.dialogueLines)
+        foreach (DialogueLine line in dialogue.dialogueLines)
         {
-            lines.Enqueue(dialogueLine);
+            lines.Enqueue(line);
         }
  
         DisplayNextDialogueLine();
 
-        //Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
     }
  
@@ -51,7 +49,7 @@ public class DialogueManager : MonoBehaviour
  
         DialogueLine currentLine = lines.Dequeue();
  
-        characterName.text = currentLine.character.name;
+        characterName.text = currentLine.character;
  
         StopAllCoroutines();
  
