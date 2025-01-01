@@ -4,6 +4,9 @@ using UnityEditor.UI;
 using UnityEngine;
 using UnityEngine.AI;
 
+/// <summary>
+/// Makes the Enemy chase down Player whenever player is nearby and not looking at the Enemy
+/// </summary>
 public class EnemyFollow : MonoBehaviour
 {
     public NavMeshAgent enemy;
@@ -21,15 +24,22 @@ public class EnemyFollow : MonoBehaviour
     public void SetFrozen(bool frozen) {
         isFrozen = frozen;
     }
-    // Update is called once per frame
+
     void Update() {
         if (Time.time - lastUpdateTime > 0.5)
         {
+            // Transform enemy position into camera coordinate system
             Vector3 viewportPoint = cam.WorldToViewportPoint(enemy.transform.position);
+
+            // Checks if the enemy is within the camera's view range
             bool isInView = viewportPoint.z > 0 &&
                             viewportPoint.x >= 0 && viewportPoint.x <= 1 &&
                             viewportPoint.y >= 0 && viewportPoint.y <= 1;
+
             float distance = Vector3.Distance(player.transform.position, enemy.transform.position);
+
+            // enemy is moving towards the player if player is not looking at the enemy (isInView=false)
+            // and if player is not too close and not too far
             if (!isInView && distance < detectionDistance && distance > minDistance && !isFrozen)
             {
                 enemy.SetDestination(player.position);

@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+/// <summary>
+/// Asks the Player to collect mushrooms and asks GameManager to checks if player has completed the task 
+/// </summary>
 public class Door : MonoBehaviour
 {
     private bool playerInRange = false;
     public TextMeshProUGUI handOverPrompt;
 
-    // Start is called before the first frame update
     void Start()
     {
         handOverPrompt.gameObject.SetActive(false);
@@ -36,7 +38,6 @@ public class Door : MonoBehaviour
     {
         if (playerInRange && Input.GetKeyDown(KeyCode.E))
         {
-
             GameManager.Instance.CheckEnded();
         }
     }

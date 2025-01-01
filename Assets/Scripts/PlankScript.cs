@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+/// <summary>
+/// When colliding with Player, trigger the isFalling animation for Plank 
+/// </summary>
 public class PlankScript : MonoBehaviour
 {
     Animator animator;

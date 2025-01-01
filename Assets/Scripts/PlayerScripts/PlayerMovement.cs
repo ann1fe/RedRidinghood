@@ -4,6 +4,9 @@ using System.Numerics;
 using UnityEngine;
 using Vector3 = UnityEngine.Vector3;
 
+/// <summary>
+/// Takes care of handling player movement
+/// </summary>
 public class PlayerMovement : MonoBehaviour
 {
     private CharacterController controller;

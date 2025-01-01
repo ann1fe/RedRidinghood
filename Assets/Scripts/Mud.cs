@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Slow down Player when it collides with Mud
+/// </summary>
 public class Mud : MonoBehaviour
 {
     public float mudSpeed = 1f; // Movement speed on mud

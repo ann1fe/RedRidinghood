@@ -1,5 +1,11 @@
 using UnityEngine;
 using System.Collections; // For IEnumerator
+
+
+/// <summary>
+/// Ends the game when player collides with KillZone. 
+/// Additionally when attached to the Enemy, Killzone rotates the player towards the enemy before ending the game
+/// </summary>
 public class Killzone : MonoBehaviour
 {
     public float rotationSpeed = 5; // Speed of the rotation
@@ -11,9 +17,9 @@ public class Killzone : MonoBehaviour
             if (gameObject.CompareTag("Enemy")) {
                 // Start rotating the player towards the enemy smoothly
                 StartCoroutine(RotateTowardsEnemy(other.gameObject));      
-            } else 
+            } 
+            else 
             {
-                // Call the GameOver method in the GameManager
                 GameManager.Instance.GameOver();
             }
         }

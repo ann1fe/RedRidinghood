@@ -1,6 +1,9 @@
 using UnityEngine;
 using TMPro;
 
+/// <summary>
+/// Item which Player can pick up. When player collides and presses "E", item gets collected
+/// </summary>
 public class CollectableItem : MonoBehaviour
 {
     private bool playerInRange = false;
@@ -10,8 +13,8 @@ public class CollectableItem : MonoBehaviour
     void Start()
     {
         collectPrompt.gameObject.SetActive(false);
-        var manager = FindObjectOfType<GameManager>();
-        manager.RegisterMushroom();
+        // each CollectableItem registers itself as a mushroom in the GameManager
+        GameManager.Instance.RegisterMushroom();
     }
 
     void OnTriggerEnter(Collider other)
@@ -42,9 +45,9 @@ public class CollectableItem : MonoBehaviour
 
     void Collect()
     {
-        GameManager.Instance.CollectMushroom();
+        GameManager.Instance.CollectMushroom(this.gameObject);
         collectPrompt.gameObject.SetActive(false);
-
-        Destroy(gameObject);
+        this.gameObject.SetActive(false);
+        //Destroy(gameObject);
     }
 }

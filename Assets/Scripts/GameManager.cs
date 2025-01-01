@@ -1,13 +1,18 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
-using System;
+using System.Collections; 
+using System.Collections.Generic;
 
+/// <summary>
+/// Keeps the game state and implements gameflow related helper functions 
+/// </summary>
 public class GameManager : MonoBehaviour
 {
-    public static GameManager Instance; // ?
+    // store GameManager Instance here to easily access it in other scripts (singleton design pattern)
+    public static GameManager Instance; 
 
-    public int collectedMushroomCount = 0;
+    public List<GameObject> collectedMushrooms = new List<GameObject>();
 
     public TMP_Text mushroomText;
 
@@ -22,7 +27,7 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
-        // Set up the singleton instance (use instance to easily access game manager)
+        // Set up the singleton instance
         if (Instance == null)   
         {
             Instance = this;
@@ -31,11 +36,6 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-    }
-
-    void Start()
-    {
-        //maxMushrooms = FindAnyObjectByType<CollectableItem>().Length;
     }
 
     void OnEnable()
@@ -47,9 +47,9 @@ public class GameManager : MonoBehaviour
     /// <summary>
     /// Called when player collects a mushroom
     /// </summary>
-    public void CollectMushroom()
+    public void CollectMushroom(GameObject mushroom)
     {
-        collectedMushroomCount++;
+        collectedMushrooms.Add(mushroom);
         UpdateMushroomUI();
     }
 
@@ -64,7 +64,7 @@ public class GameManager : MonoBehaviour
 
     private void UpdateMushroomUI()
     {
-        mushroomText.text = "Mushrooms Collected: " + collectedMushroomCount+ "/"+maxMushroomCount;
+        mushroomText.text = "Mushrooms Collected: " + collectedMushrooms.Count + "/"+maxMushroomCount;
     }
 
     public void GameOver()
@@ -82,18 +82,12 @@ public class GameManager : MonoBehaviour
     public void SetPlayerFrozen(bool frozen) {
         player.GetComponent<PlayerMovement>().enabled = !frozen; 
         playerCamera.GetComponent<PlayerCamera>().enabled = !frozen; 
-    }    
-    public void SetEnemiesFrozen(bool frozen) {
-        var enemies = GameObject.FindGameObjectsWithTag("Enemy");
-        foreach (var enemy in enemies) {
-            enemy.GetComponent<EnemyFollow>().SetFrozen(frozen);
-        }
     }
     public void RestartGame()
     {
         Cursor.lockState = CursorLockMode.Locked;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        collectedMushroomCount = 0;
+        collectedMushrooms.Clear();
         UpdateMushroomUI();
         gameOverUI.SetActive(false);
         gameWinUI.SetActive(false);
@@ -103,9 +97,19 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void CheckEnded()
     {
-        if (collectedMushroomCount == maxMushroomCount)
+        if (collectedMushrooms.Count == maxMushroomCount)
         {
-            WinGame();
+            StartCoroutine(DropMushrooms());
         }   
+    }
+    IEnumerator DropMushrooms() {
+        foreach (var mushroom in collectedMushrooms)
+        {
+            PickupScript pickup = player.GetComponent<PickupScript>();
+            mushroom.transform.position = pickup.holdPos.transform.position;
+            mushroom.SetActive(true);
+            yield return new WaitForSeconds(0.3f);
+        }
+        WinGame();
     }
 }

@@ -673,6 +673,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a2bd798ea40c7e341aa61ad124d95342, type: 3}
+--- !u!4 &133126838 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2981318274331976503, guid: 3e987fd4e1824ab4ca6be8a6e111d935,
+    type: 3}
+  m_PrefabInstance: {fileID: 558163570}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &137557610
 GameObject:
   m_ObjectHideFlags: 0
@@ -2370,6 +2376,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114721450966744626, guid: 6d2bb9154d502fd46a5faf6e3b55f9f1,
+        type: 3}
+      propertyPath: cameraToLookAt
+      value: 
+      objectReference: {fileID: 429776311}
+    - target: {fileID: 114869251064634074, guid: 6d2bb9154d502fd46a5faf6e3b55f9f1,
+        type: 3}
+      propertyPath: cameraToLookAt
+      value: 
+      objectReference: {fileID: 429776311}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -2389,6 +2405,79 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 514048636}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &558163570
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 623785131}
+    m_Modifications:
+    - target: {fileID: 2826022864031936001, guid: 3e987fd4e1824ab4ca6be8a6e111d935,
+        type: 3}
+      propertyPath: collectPrompt
+      value: 
+      objectReference: {fileID: 1797547191}
+    - target: {fileID: 2981318274331976503, guid: 3e987fd4e1824ab4ca6be8a6e111d935,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -23.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2981318274331976503, guid: 3e987fd4e1824ab4ca6be8a6e111d935,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2981318274331976503, guid: 3e987fd4e1824ab4ca6be8a6e111d935,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 63.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2981318274331976503, guid: 3e987fd4e1824ab4ca6be8a6e111d935,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.68421113
+      objectReference: {fileID: 0}
+    - target: {fileID: 2981318274331976503, guid: 3e987fd4e1824ab4ca6be8a6e111d935,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2981318274331976503, guid: 3e987fd4e1824ab4ca6be8a6e111d935,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.72928405
+      objectReference: {fileID: 0}
+    - target: {fileID: 2981318274331976503, guid: 3e987fd4e1824ab4ca6be8a6e111d935,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2981318274331976503, guid: 3e987fd4e1824ab4ca6be8a6e111d935,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2981318274331976503, guid: 3e987fd4e1824ab4ca6be8a6e111d935,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 93.653
+      objectReference: {fileID: 0}
+    - target: {fileID: 2981318274331976503, guid: 3e987fd4e1824ab4ca6be8a6e111d935,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3410518391255586173, guid: 3e987fd4e1824ab4ca6be8a6e111d935,
+        type: 3}
+      propertyPath: m_Name
+      value: Mushroom (5)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3e987fd4e1824ab4ca6be8a6e111d935, type: 3}
 --- !u!1 &567488717
 GameObject:
   m_ObjectHideFlags: 0
@@ -2834,6 +2923,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Mushroom (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 3410518391255586173, guid: 3e987fd4e1824ab4ca6be8a6e111d935,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2949,6 +3043,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1792892575}
+  - {fileID: 133126838}
   - {fileID: 986863691}
   - {fileID: 608720656}
   - {fileID: 1684368165}
@@ -3456,13 +3551,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 365e2333c243f7746becd464d9b3da8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collectedMushroomCount: 0
+  collectedMushrooms: []
   mushroomText: {fileID: 582363433}
   gameOverUI: {fileID: 898709380}
   gameWinUI: {fileID: 1905640418}
   handOverMushroomsUI: {fileID: 826355881}
-  player: {fileID: 0}
-  playerCamera: {fileID: 0}
+  player: {fileID: 903531765}
+  playerCamera: {fileID: 855190711}
 --- !u!4 &764254359
 Transform:
   m_ObjectHideFlags: 0
@@ -4083,6 +4178,18 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a2bd798ea40c7e341aa61ad124d95342, type: 3}
+--- !u!1 &855190711 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7460398081898836074, guid: 351143fe3073a124dbef9318e2a92b82,
+    type: 3}
+  m_PrefabInstance: {fileID: 1257378694}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &855190715 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 917414993031215982, guid: 351143fe3073a124dbef9318e2a92b82,
+    type: 3}
+  m_PrefabInstance: {fileID: 1257378694}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &872480466
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4228,6 +4335,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 898709380}
   m_CullTransparentMesh: 1
+--- !u!1 &903531765 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3808964890029950438, guid: 351143fe3073a124dbef9318e2a92b82,
+    type: 3}
+  m_PrefabInstance: {fileID: 1257378694}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &903531771
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 903531765}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df7d94fb88b989141bcc6e2920a9fabb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  collectPrompt: {fileID: 1797547191}
+  holdPos: {fileID: 1545205260}
 --- !u!4 &921633662 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3448647613925869208, guid: a2bd798ea40c7e341aa61ad124d95342,
@@ -4561,6 +4688,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Mushroom (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3410518391255586173, guid: 3e987fd4e1824ab4ca6be8a6e111d935,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5279,6 +5411,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114721450966744626, guid: 6d2bb9154d502fd46a5faf6e3b55f9f1,
+        type: 3}
+      propertyPath: cameraToLookAt
+      value: 
+      objectReference: {fileID: 429776311}
+    - target: {fileID: 114869251064634074, guid: 6d2bb9154d502fd46a5faf6e3b55f9f1,
+        type: 3}
+      propertyPath: cameraToLookAt
+      value: 
+      objectReference: {fileID: 429776311}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -5497,6 +5639,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 7270871321084977242, guid: 351143fe3073a124dbef9318e2a92b82,
+        type: 3}
+      propertyPath: gravity
+      value: 9.8
+      objectReference: {fileID: 0}
     - target: {fileID: 8165146100252788222, guid: 351143fe3073a124dbef9318e2a92b82,
         type: 3}
       propertyPath: m_BackGroundColor.a
@@ -5518,9 +5665,18 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_RemovedGameObjects:
+    - {fileID: 1487451729691368535, guid: 351143fe3073a124dbef9318e2a92b82, type: 3}
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 917414993031215982, guid: 351143fe3073a124dbef9318e2a92b82,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1545205260}
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3808964890029950438, guid: 351143fe3073a124dbef9318e2a92b82,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 903531771}
   m_SourcePrefab: {fileID: 100100000, guid: 351143fe3073a124dbef9318e2a92b82, type: 3}
 --- !u!4 &1272165687 stripped
 Transform:
@@ -7049,6 +7205,37 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1542824332}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1545205259
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1545205260}
+  m_Layer: 0
+  m_Name: HoldPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1545205260
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1545205259}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.059, y: -0.3549962, z: 1.0199995}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 855190715}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1573758158 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3448647613925869208, guid: a2bd798ea40c7e341aa61ad124d95342,
@@ -7764,6 +7951,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Mushroom (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3410518391255586173, guid: 3e987fd4e1824ab4ca6be8a6e111d935,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
