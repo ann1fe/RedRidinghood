@@ -16,7 +16,6 @@ public class Mud : MonoBehaviour
             if (playerMovement != null)
             {
                 playerMovement.SetMovementSpeed(mudSpeed);
-                playerMovement.SetCanJump(false);
             }
         }
     }
@@ -31,7 +30,6 @@ public class Mud : MonoBehaviour
             if (playerMovement != null)
             {
                 playerMovement.ResetMovementSpeed();
-                playerMovement.SetCanJump(true);
             }
         }
     }

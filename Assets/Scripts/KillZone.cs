@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using System.Collections; // For IEnumerator
 public class Killzone : MonoBehaviour
 {
     public float rotationSpeed = 5; // Speed of the rotation
@@ -18,7 +18,12 @@ public class Killzone : MonoBehaviour
             }
         }
     }
-    System.Collections.IEnumerator RotateTowardsEnemy(GameObject player)
+    
+    /// <summary>
+    /// Coroutine which rotates the player towards the enemy when they collide with each other
+    /// Otherwise the player might not know why they died
+    /// </summary>
+    IEnumerator RotateTowardsEnemy(GameObject player)
     {
         GameManager.Instance.SetPlayerFrozen(true);
         // Calculate direction from player to enemy
@@ -33,7 +38,7 @@ public class Killzone : MonoBehaviour
         {
             var newRot = Quaternion.Slerp(player.transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
             player.transform.rotation = newRot;
-            yield return null; // Wait until the next frame
+            yield return null; // Leaves the coroutine to do other work and return here again on next frame
         }
         
         // Ensure exact rotation at the end

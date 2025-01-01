@@ -10,6 +10,8 @@ public class CollectableItem : MonoBehaviour
     void Start()
     {
         collectPrompt.gameObject.SetActive(false);
+        var manager = FindObjectOfType<GameManager>();
+        manager.RegisterMushroom();
     }
 
     void OnTriggerEnter(Collider other)
@@ -40,7 +42,7 @@ public class CollectableItem : MonoBehaviour
 
     void Collect()
     {
-        GameManager.Instance.AddMushroom();
+        GameManager.Instance.CollectMushroom();
         collectPrompt.gameObject.SetActive(false);
 
         Destroy(gameObject);

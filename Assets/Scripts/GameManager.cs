@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance; // ?
 
-    public int mushroomCount = 0;
+    public int collectedMushroomCount = 0;
 
     public TMP_Text mushroomText;
 
@@ -17,6 +17,8 @@ public class GameManager : MonoBehaviour
     public GameObject handOverMushroomsUI;
     public GameObject player;
     public GameObject playerCamera;
+
+    int maxMushroomCount=0; 
 
     void Awake()
     {
@@ -31,22 +33,38 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    void Start()
+    {
+        //maxMushrooms = FindAnyObjectByType<CollectableItem>().Length;
+    }
+
     void OnEnable()
     {
         // Unpause the game because gameover paused the game
         Time.timeScale = 1f;
     }
 
-    // Add a mushroom and update the UI
-    public void AddMushroom()
+    /// <summary>
+    /// Called when player collects a mushroom
+    /// </summary>
+    public void CollectMushroom()
     {
-        mushroomCount++;
+        collectedMushroomCount++;
         UpdateMushroomUI();
     }
 
-    void UpdateMushroomUI()
+    /// <summary>
+    /// Called once by each mushroom present in the scene
+    /// </summary>
+    public void RegisterMushroom()
     {
-        mushroomText.text = "Mushrooms Collected: " + mushroomCount;
+        maxMushroomCount++;
+        UpdateMushroomUI();
+    }
+
+    private void UpdateMushroomUI()
+    {
+        mushroomText.text = "Mushrooms Collected: " + collectedMushroomCount+ "/"+maxMushroomCount;
     }
 
     public void GameOver()
@@ -58,10 +76,8 @@ public class GameManager : MonoBehaviour
 
     public void WinGame()
     {
-        gameWinUI.SetActive(true);
-        SetPlayerFrozen(true);
+        SceneManager.LoadScene("EndScreen");
         Cursor.lockState = CursorLockMode.None;
-        handOverMushroomsUI.SetActive(false);
     }
     public void SetPlayerFrozen(bool frozen) {
         player.GetComponent<PlayerMovement>().enabled = !frozen; 
@@ -77,20 +93,17 @@ public class GameManager : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        mushroomCount = 0;
+        collectedMushroomCount = 0;
         UpdateMushroomUI();
         gameOverUI.SetActive(false);
         gameWinUI.SetActive(false);
     }
-
-    public int MushroomsLeftCount()
+    /// <summary>
+    /// Checks if the player has collected all the mushrooms and calls WinGame if yes
+    /// </summary>
+    public void CheckEnded()
     {
-        return GameObject.FindGameObjectsWithTag("Mushroom").Length;
-    }
-
-    public void NotifyDialogueEnded()
-    {
-        if (MushroomsLeftCount() == 0)
+        if (collectedMushroomCount == maxMushroomCount)
         {
             WinGame();
         }   

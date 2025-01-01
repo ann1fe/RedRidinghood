@@ -64,7 +64,6 @@
     <Analyzer Include="D:\Unity\2022.3.44f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\Dialogue\DialogueManager.cs" />
     <Compile Include="Assets\Scripts\PlankScript.cs" />
     <Compile Include="Assets\Scripts\KillZone.cs" />
     <Compile Include="Assets\ExternalAssets\Idyllic Fantasy Nature\Scripts\VegetationBendControl.cs" />
@@ -72,6 +71,7 @@
     <Compile Include="Assets\Scripts\Mud.cs" />
     <Compile Include="Assets\Scripts\PlayerScripts\PlayerMovement.cs" />
     <Compile Include="Assets\ExternalAssets\Idyllic Fantasy Nature\Scripts\BushLeafTrigger.cs" />
+    <Compile Include="Assets\Scripts\Door.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\ExternalAssets\Idyllic Fantasy Nature\Scripts\ButterflySpawnArea.cs" />
     <Compile Include="Assets\ExternalAssets\Idyllic Fantasy Nature\Scripts\ButterflySpawn.cs" />
@@ -81,7 +81,6 @@
     <Compile Include="Assets\Scripts\SceneLoader.cs" />
     <Compile Include="Assets\Scripts\CollectableItem.cs" />
     <Compile Include="Assets\Scripts\EnemyFollow.cs" />
-    <Compile Include="Assets\Scripts\Dialogue\DialogueTrigger.cs" />
     <Compile Include="Assets\ExternalAssets\Idyllic Fantasy Nature\Scripts\PlayerMovement.cs" />
     <Compile Include="Assets\ExternalAssets\Laterns and candles\scripts\CameraFacing.cs" />
     <Compile Include="Assets\ExternalAssets\Laterns and candles\scripts\ExtendedFlycam.cs" />

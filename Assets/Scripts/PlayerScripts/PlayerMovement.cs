@@ -9,11 +9,6 @@ public class PlayerMovement : MonoBehaviour
     private CharacterController controller;
     public float speed = 5f;
     public float gravity = 9.8f;
-    public float jumpHeight = 2f;
-    private bool canJump = true;
-    private float upSpeed;
-    public float groundCheckDistance = 0.4f;
-    public LayerMask groundMask;
     private float normalSpeed;
     
 
@@ -22,29 +17,20 @@ public class PlayerMovement : MonoBehaviour
         controller = GetComponent<CharacterController>();
         normalSpeed = speed;
     }
-    bool IsGrounded()
-    {
-        Vector3 capsuleBottom = transform.position - Vector3.up * controller.height / 2;
-        return Physics.CheckSphere(capsuleBottom, groundCheckDistance, groundMask);    
-    }
+
     void Update()
     {
-        var isGrounded = IsGrounded();
-
         // Get input for horizontal and vertical movement (WASD or arrow keys)
         float rightSpeed = Input.GetAxis("Horizontal") * speed;
         float forwardSpeed = Input.GetAxis("Vertical") * speed;
 
-        // Jump logic
-        if (isGrounded && canJump && Input.GetButtonDown("Jump"))
-        {
-            // v2=2gh => v = sqrt(2gh)
-            upSpeed = Mathf.Sqrt(2f * gravity * jumpHeight);
-        }
-
-        // apply gravity to vertical speed v=g*t
-        upSpeed -= gravity * Time.deltaTime;
-        Vector3 moveSpeed = transform.right * rightSpeed + transform.forward * forwardSpeed + Vector3.up * upSpeed;
+        // controller.Move requires a movement vector in world coordinates.
+        // To achieve this, we calculate movement in the player's local space and transform it into world coordinates:
+        // - Multiply rightSpeed by the player's right vector (transform.right) to calculate the rightward movement in world space.
+        // - Multiply forwardSpeed by the player's forward vector (transform.forward) to calculate the forward movement in world space.
+        // Additionally, we add a downward velocity to simulate gravity, using Vector3.down multiplied by a constant gravity value.
+        // finally we add all 3 movement vectors to get player movement vector in the world coordinates
+        Vector3 moveSpeed = transform.right * rightSpeed + transform.forward * forwardSpeed + Vector3.down * gravity;
         controller.Move(moveSpeed * Time.deltaTime);
 
     }
@@ -61,8 +47,4 @@ public class PlayerMovement : MonoBehaviour
         speed = normalSpeed;
     }
 
-    public void SetCanJump(bool value)
-    {
-        canJump = value;
-    }
 }
