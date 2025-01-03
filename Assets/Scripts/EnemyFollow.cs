@@ -13,8 +13,9 @@ public class EnemyFollow : MonoBehaviour
     public Camera cam;
     Animator animator;
 
-    public float detectionDistance = 25;
-    public float minDistance = 4;
+    public float viewingAngle = 30f;
+    public float maxDetectionDistance = 25;
+    public float minDetectionDistance = 2;
     private float lastUpdateTime = 0;
     private bool isFrozen = false;
     void Awake() {
@@ -28,21 +29,23 @@ public class EnemyFollow : MonoBehaviour
     {
         if (Time.time - lastUpdateTime > 0.5f)
         {
-            // Cast a ray from the player's position to the enemy
             Vector3 directionToEnemy = (enemy.transform.position - player.transform.position).normalized;
 
             // Check if the enemy is within ±30 degrees of the player's forward direction
             float angleToEnemy = Vector3.Angle(player.transform.forward, directionToEnemy);
-            bool isWithinAngle = angleToEnemy <= 30f;
+            bool isWithinViewAngle = angleToEnemy <= viewingAngle;
 
+            // Cast a ray from the player's position to the enemy
             Ray ray = new Ray(player.transform.position, directionToEnemy);
             RaycastHit hit;
-            // Check if the ray hits the enemy and if there are no obstacles in between
-            bool isEnemyVisible = Physics.Raycast(ray, out hit, detectionDistance) && hit.transform == enemy.transform;
+            // Check if the ray hits the enemy (if there are no obstacles in between)
+            bool isDetectable = Physics.Raycast(ray, out hit, maxDetectionDistance) && hit.transform == enemy.transform;
 
-            float distance = Vector3.Distance(player.transform.position, enemy.transform.position);
-            // The enemy moves toward the player if it's not visible, within detection distance, and not too close or far
-            if (!(isEnemyVisible && isWithinAngle) && distance < detectionDistance && distance > minDistance && !isFrozen)
+            // can see if it's in view angle and can be hit with raycast
+            bool canSeeEnemy = isWithinViewAngle && isDetectable;
+
+            // The enemy moves toward the player if it's not visible and not too close
+            if (!canSeeEnemy && hit.distance > minDetectionDistance && !isFrozen)
             {
                 enemy.SetDestination(player.position);
                 animator.SetBool("isMoving", true);
