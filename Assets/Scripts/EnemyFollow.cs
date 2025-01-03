@@ -6,12 +6,14 @@ using UnityEngine.AI;
 /// <summary>
 /// Makes the Enemy chase down Player whenever player is nearby and not looking at the Enemy
 /// </summary>
+[RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(NavMeshAgent))]
 public class EnemyFollow : MonoBehaviour
 {
-    public NavMeshAgent enemy;
     public Transform player;
     public Camera cam;
     Animator animator;
+    NavMeshAgent enemy;
 
     public float viewingAngle = 30f;
     public float maxDetectionDistance = 25;
@@ -20,6 +22,7 @@ public class EnemyFollow : MonoBehaviour
     private bool isFrozen = false;
     void Awake() {
         animator = GetComponent<Animator>();
+        enemy = GetComponent<NavMeshAgent>();
     }
     public void SetFrozen(bool frozen) {
         isFrozen = frozen;
