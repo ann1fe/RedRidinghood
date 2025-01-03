@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.UI;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -25,22 +24,25 @@ public class EnemyFollow : MonoBehaviour
         isFrozen = frozen;
     }
 
-    void Update() {
-        if (Time.time - lastUpdateTime > 0.5)
+    void Update()
+    {
+        if (Time.time - lastUpdateTime > 0.5f)
         {
-            // Transform enemy position into camera coordinate system
-            Vector3 viewportPoint = cam.WorldToViewportPoint(enemy.transform.position);
+            // Cast a ray from the player's position to the enemy
+            Vector3 directionToEnemy = (enemy.transform.position - player.transform.position).normalized;
 
-            // Checks if the enemy is within the camera's view range
-            bool isInView = viewportPoint.z > 0 &&
-                            viewportPoint.x >= 0 && viewportPoint.x <= 1 &&
-                            viewportPoint.y >= 0 && viewportPoint.y <= 1;
+            // Check if the enemy is within ±30 degrees of the player's forward direction
+            float angleToEnemy = Vector3.Angle(player.transform.forward, directionToEnemy);
+            bool isWithinAngle = angleToEnemy <= 30f;
+
+            Ray ray = new Ray(player.transform.position, directionToEnemy);
+            RaycastHit hit;
+            // Check if the ray hits the enemy and if there are no obstacles in between
+            bool isEnemyVisible = Physics.Raycast(ray, out hit, detectionDistance) && hit.transform == enemy.transform;
 
             float distance = Vector3.Distance(player.transform.position, enemy.transform.position);
-
-            // enemy is moving towards the player if player is not looking at the enemy (isInView=false)
-            // and if player is not too close and not too far
-            if (!isInView && distance < detectionDistance && distance > minDistance && !isFrozen)
+            // The enemy moves toward the player if it's not visible, within detection distance, and not too close or far
+            if (!(isEnemyVisible && isWithinAngle) && distance < detectionDistance && distance > minDistance && !isFrozen)
             {
                 enemy.SetDestination(player.position);
                 animator.SetBool("isMoving", true);
@@ -50,6 +52,7 @@ public class EnemyFollow : MonoBehaviour
                 enemy.ResetPath();
                 animator.SetBool("isMoving", false);
             }
+
             lastUpdateTime = Time.time;
         }
     }

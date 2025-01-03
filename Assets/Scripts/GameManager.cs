@@ -22,6 +22,8 @@ public class GameManager : MonoBehaviour
     public GameObject handOverMushroomsUI;
     public GameObject player;
     public GameObject playerCamera;
+    public Transform holdPos;
+
 
     int maxMushroomCount=0; 
 
@@ -105,8 +107,7 @@ public class GameManager : MonoBehaviour
     IEnumerator DropMushrooms() {
         foreach (var mushroom in collectedMushrooms)
         {
-            PickupScript pickup = player.GetComponent<PickupScript>();
-            mushroom.transform.position = pickup.holdPos.transform.position;
+            mushroom.transform.position = holdPos.position;
             mushroom.SetActive(true);
             yield return new WaitForSeconds(0.3f);
         }
